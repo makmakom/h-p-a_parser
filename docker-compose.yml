@@ -7,3 +7,5 @@ services:
     environment:
       POSTGRES_USER: 'user_pg'
       POSTGRES_PASSWORD: 'user_pg'
+    volumes:
+      - '.db-data/:/var/lib/postgresql/data/'
