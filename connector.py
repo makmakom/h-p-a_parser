@@ -82,7 +82,7 @@ class DbUtils:
         return self.__cursor.fetchone()
 
     def get_currencies(self):
-        sql = f'''select id, international_name, current_name
+        sql = f'''select id, international_name, current_name, iso
             from currency_statistics.currency
             where is_enabled is true;'''
 
