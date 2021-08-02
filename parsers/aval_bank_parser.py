@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import tabula
+from tabula.io import read_pdf
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -21,7 +21,7 @@ class RaiffeisenBankAvalParser(Bank):
         self.__bank_id = bank_id
 
     def __get_html(self):
-        path = '../chromedriver'
+        path = os.path.realpath('chromedriver')
         
         display = Display(visible=False, size=(800, 800))
         display.start()
@@ -67,7 +67,7 @@ class RaiffeisenBankAvalParser(Bank):
                 file.write(response.content)
 
             if os.path.exists(file_name):
-                pdf = tabula.read_pdf(file_name, pages=1, output_format="json")
+                pdf = read_pdf(file_name, pages=1, output_format="json")
                 for line in pdf[0]['data']:
                     i = 0
                     while i < len(line):
